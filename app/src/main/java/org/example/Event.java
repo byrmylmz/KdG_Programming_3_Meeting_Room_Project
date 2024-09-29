@@ -3,11 +3,11 @@ package org.example;
 import java.time.LocalDate;
 
 public class Event {
-    private int eventID;
-    private String name;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private String organizer;
+    private final int eventID;
+    private final String name;
+    private final LocalDate startDate;
+    private final LocalDate endDate;
+    private final String organizer;
 
     public Event(int eventID, String name, LocalDate startDate, LocalDate endDate, String organizer) {
         this.eventID = eventID;

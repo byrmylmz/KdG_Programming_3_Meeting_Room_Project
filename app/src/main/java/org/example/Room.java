@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Room {
-    private int roomID;
-    private String roomNumber;
-    private double capacity;
-    private RoomType type;
-    private Building building;
-    private List<Event> events;
+    private final int roomID;
+    private final String roomNumber;
+    private final double capacity;
+    private final RoomType type;
+    private final Building building;
+    private final List<Event> events;
 
     public Room(int roomID, String roomNumber, double capacity, RoomType type, Building building) {
         this.roomID = roomID;

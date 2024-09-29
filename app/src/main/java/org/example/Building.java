@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Building {
-    private int buildingID;
-    private String name;
-    private String address;
-    private int numberOfFloors;
-    private List<Room> rooms;
+    private final int buildingID;
+    private final String name;
+    private final String address;
+    private final int numberOfFloors;
+    private final List<Room> rooms;
 
     public Building(int buildingID, String name, String address, int numberOfFloors) {
         this.buildingID = buildingID;
