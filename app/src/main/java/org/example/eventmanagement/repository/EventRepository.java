@@ -1,2 +1,10 @@
-package org.example.eventmanagement.repository;public interface EventRepository {
+package org.example.eventmanagement.repository;
+
+
+import org.example.eventmanagement.model.Event;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface EventRepository extends JpaRepository<Event, Long> {
 }
