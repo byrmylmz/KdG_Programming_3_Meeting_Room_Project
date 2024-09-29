@@ -23,6 +23,12 @@ dependencies {
 
     // Use JUnit Jupiter for testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+
+    //Jakarta dependency
+    implementation("jakarta.persistence:jakarta.persistence-api:3.1.0") // JPA
+    implementation("jakarta.transaction:jakarta.transaction-api:2.0.0") //sql transaction management.
+
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
