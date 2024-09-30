@@ -18,6 +18,7 @@ public class Building {
     @OneToMany(mappedBy = "building", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Room> rooms = new ArrayList<>();
 
+
     public Long getBuildingID() {
         return buildingID;
     }
@@ -56,5 +57,16 @@ public class Building {
 
     public void setRooms(List<Room> rooms) {
         this.rooms = rooms;
+    }
+
+    @Override
+    public String toString() {
+        return "Building{" +
+                "buildingID=" + buildingID +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", numberOfFloors=" + numberOfFloors +
+//                ", rooms=" + rooms + // lazy loading we need mapper or dto.
+                '}';
     }
 }

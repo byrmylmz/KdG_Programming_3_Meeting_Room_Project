@@ -12,18 +12,13 @@ repositories {
 }
 
 dependencies {
-    // Spring Boot starter for web applications
     implementation("org.springframework.boot:spring-boot-starter")
 
-    // Spring Boot starter for data access with JPA
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
-    // PostgreSQL database driver
     runtimeOnly("org.postgresql:postgresql:42.5.0") // Ensure you have the correct version
 
-    // Use JUnit Jupiter for testing
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-
 
     //Jakarta dependency
     implementation("jakarta.persistence:jakarta.persistence-api:3.1.0") // JPA
@@ -34,7 +29,7 @@ dependencies {
 // Apply a specific Java toolchain to ease working on different environments.
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(21))
+        languageVersion.set(JavaLanguageVersion.of(17))
     }
 }
 
