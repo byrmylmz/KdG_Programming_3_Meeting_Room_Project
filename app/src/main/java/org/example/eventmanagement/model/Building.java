@@ -66,7 +66,7 @@ public class Building {
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", numberOfFloors=" + numberOfFloors +
-//                ", rooms=" + rooms + // lazy loading we need mapper or dto.
+//                ", rooms=" + rooms +
                 '}';
     }
 }

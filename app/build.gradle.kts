@@ -7,26 +7,22 @@ plugins {
 }
 
 repositories {
-    // Use Maven Central for resolving dependencies.
     mavenCentral()
 }
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
-
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-
+    //thymeleaf
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     runtimeOnly("org.postgresql:postgresql:42.5.0") // Ensure you have the correct version
-
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-
     //Jakarta dependency
     implementation("jakarta.persistence:jakarta.persistence-api:3.1.0") // JPA
     implementation("jakarta.transaction:jakarta.transaction-api:2.0.0") //sql transaction management.
 
 }
 
-// Apply a specific Java toolchain to ease working on different environments.
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(17))
