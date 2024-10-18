@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Building List</title>
+</head>
+<body>
+<h1>All Buildings</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Number of Floors</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="building : ${buildings}">
+        <td th:text="${building.name}"></td>
+        <td th:text="${building.address}"></td>
+        <td th:text="${building.numberOfFloors}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<a href="/buildings/add">Add New Building</a>
+</body>
+</html>

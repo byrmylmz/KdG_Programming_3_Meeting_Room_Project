@@ -10,4 +10,5 @@ public interface BuildingService {
     List<Building> getAllBuildings();
     Building saveBuilding(Building building);
     Building getBuildingById(Long id);
+    void addBuilding(Building building);
 }

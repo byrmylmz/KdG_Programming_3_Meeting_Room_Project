@@ -29,4 +29,9 @@ public class BuildingServiceImpl implements BuildingService {
     public Building getBuildingById(Long id) {
         return buildingRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public void addBuilding(Building building) {
+        buildingRepository.save(building);
+    }
 }

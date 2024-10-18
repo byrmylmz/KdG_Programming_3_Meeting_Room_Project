@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Building</title>
+</head>
+<body>
+<h1>Add New Building</h1>
+
+<form action="#" th:action="@{/buildings/add}" th:object="${building}" method="post">
+    <label>Name:</label>
+    <input type="text" th:field="*{name}" required/>
+    <br/>
+    <label>Address:</label>
+    <input type="text" th:field="*{address}" required/>
+    <br/>
+    <label>Number of Floors:</label>
+    <input type="number" th:field="*{numberOfFloors}" required/>
+    <br/>
+    <button type="submit">Add Building</button>
+</form>
+
+<a href="/buildings">Back to Building List</a>
+</body>
+</html>
