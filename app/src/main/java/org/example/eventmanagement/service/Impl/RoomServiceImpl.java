@@ -3,12 +3,15 @@ package org.example.eventmanagement.service.Impl;
 import org.example.eventmanagement.model.Room;
 import org.example.eventmanagement.repository.RoomRepository;
 import org.example.eventmanagement.service.RoomService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class RoomServiceImpl implements RoomService {
+    private static final Logger logger = LoggerFactory.getLogger(RoomServiceImpl.class);
     private final RoomRepository roomRepository;
 
     public RoomServiceImpl(RoomRepository roomRepository) {
@@ -17,21 +20,40 @@ public class RoomServiceImpl implements RoomService {
 
     @Override
     public List<Room> getAllRooms() {
-        return roomRepository.findAll();
+        logger.debug("Fetching all rooms from the database.");
+        List<Room> rooms = roomRepository.findAll();
+        logger.debug("Found {} rooms.", rooms.size());
+        return rooms;
     }
 
     @Override
     public Room getRoomById(Long id) {
-        return roomRepository.findById(id).orElseThrow(() -> new RuntimeException("Room not found"));
+        logger.debug("Fetching room with ID: {}", id);
+        Room room = roomRepository.findById(id).orElseThrow(() -> {
+            logger.error("Room with ID {} not found", id);
+            return new RuntimeException("Room not found");
+        });
+        logger.info("Room with ID {} found.", id);
+        return room;
     }
 
     @Override
     public Room saveRoom(Room room) {
-        return roomRepository.save(room);
+        logger.debug("Saving room: {}", room);
+        Room savedRoom = roomRepository.save(room);
+        logger.info("Room with ID {} has been saved successfully.", savedRoom.getRoomID());
+        return savedRoom;
     }
 
     @Override
     public void deleteRoom(Long id) {
-        roomRepository.deleteById(id);
+        logger.debug("Deleting room with ID: {}", id);
+        try {
+            roomRepository.deleteById(id);
+            logger.info("Room with ID {} has been deleted successfully.", id);
+        } catch (Exception e) {
+            logger.error("Error deleting room with ID {}: {}", id, e.getMessage());
+            throw new RuntimeException("Failed to delete room", e);
+        }
     }
 }
