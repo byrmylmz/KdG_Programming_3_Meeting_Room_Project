@@ -8,11 +8,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class EventManagementApplication {
     public static void main(String[] args) {
-        ConfigurableApplicationContext context =
-                SpringApplication.run(EventManagementApplication.class, args);
-        context.getBean(Menu.class).showMenu();
-        context.close();
+        SpringApplication.run(EventManagementApplication.class, args);
     }
-
-
 }

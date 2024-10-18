@@ -21,7 +21,17 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
+    public Room getRoomById(Long id) {
+        return roomRepository.findById(id).orElseThrow(() -> new RuntimeException("Room not found"));
+    }
+
+    @Override
     public Room saveRoom(Room room) {
         return roomRepository.save(room);
+    }
+
+    @Override
+    public void deleteRoom(Long id) {
+        roomRepository.deleteById(id);
     }
 }

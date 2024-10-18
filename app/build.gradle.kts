@@ -13,14 +13,17 @@ repositories {
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    //thymeleaf
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
-    runtimeOnly("org.postgresql:postgresql:42.5.0") // Ensure you have the correct version
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+    runtimeOnly("org.postgresql:postgresql:42.5.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    //Jakarta dependency
-    implementation("jakarta.persistence:jakarta.persistence-api:3.1.0") // JPA
-    implementation("jakarta.transaction:jakarta.transaction-api:2.0.0") //sql transaction management.
 
+    // Jakarta dependencies
+    implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
+    implementation("jakarta.transaction:jakarta.transaction-api:2.0.0")
+
+    // Spring Web dependency
+    implementation("org.springframework.boot:spring-boot-starter-web") // Eklenmesi gereken kütüphane
 }
 
 java {
