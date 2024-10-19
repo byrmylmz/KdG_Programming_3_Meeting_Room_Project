@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+<script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}">
+</script>
 <head>
     <title>Event Management</title>
 </head>
 <body>
-<h1>Welcome to Event Management</h1>
+<h1>Hello World</h1>
+<div class="container">
+    <div class="alert alert-warning alert-dismissible fade show"
+         role="alert">
+        <strong>Holy guacamole!</strong> You should check in on some of those
+        fields below.
+        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                aria-label="Close"></button>
+    </div>
+</div>
 <nav>
     <ul>
         <li><a th:href="@{/rooms}">All Rooms</a></li>

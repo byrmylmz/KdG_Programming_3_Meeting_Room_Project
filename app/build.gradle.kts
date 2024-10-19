@@ -17,6 +17,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     runtimeOnly("org.postgresql:postgresql:42.5.0")
+    implementation("org.webjars:bootstrap:5.3.2")
+    implementation("org.webjars:webjars-locator-core:0.48")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
 
