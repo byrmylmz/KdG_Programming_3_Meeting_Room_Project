@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/app.css}"/> <!-- app.css dosyasını dahil ettik -->
+</head>
+<body>
+<section th:fragment="dashboard(totalRoomNumber, totalEventNumber, totalBuildingNumber)">
+
+
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card text-white bg-primary mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Room Numbers</h5>
+                        <p class="card-number" th:text="${totalRoomNumber}">120</p> <!-- Dinamik değer -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-white bg-success mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Event Numbers</h5>
+                        <p class="card-number" th:text="${totalEventNumber}">45</p> <!-- Dinamik değer -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-white bg-warning mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Building Numbers</h5>
+                        <p class="card-number" th:text="${totalBuildingNumber}">10</p> <!-- Dinamik değer -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

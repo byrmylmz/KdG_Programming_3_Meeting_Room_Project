@@ -1,5 +1,6 @@
 package be.kdg.event.controller;
 
+import be.kdg.event.dto.EventDto;
 import be.kdg.event.model.Event;
 import be.kdg.event.service.EventService;
 import org.springframework.stereotype.Controller;
@@ -7,7 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class EventController {
@@ -20,9 +24,20 @@ public class EventController {
     @GetMapping("/events")
     public String listEvents(Model model) {
         List<Event> events = eventService.getAllEvents();
-        model.addAttribute("events", events);
-        return "events/list"; 
+        List<EventDto> eventDtos = events.stream()
+                .map(event -> EventDto.builder()
+                        .eventName(event.getEventName())
+                        .organizer(event.getOrganizer())
+                        .description(event.getDescription())
+                        .startDateTime(event.getStartDateTime())
+                        .endDateTime(event.getEndDateTime())
+                        .build())
+                .collect(Collectors.toList());
+
+        model.addAttribute("events", eventDtos);
+        return "events/list";
     }
+
 
     @GetMapping("/events/add")
     public String addEventForm(Model model) {

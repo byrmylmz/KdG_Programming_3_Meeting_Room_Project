@@ -1,24 +1,46 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout.html}">
 <head>
     <title>Add Event</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" />
 </head>
 <body>
-<h1>Add New Event</h1>
+<section layout:fragment="content" class="container mt-5">
 
-<form action="#" th:action="@{/events/add}" th:object="${event}" method="post">
-    <label>Name:</label>
-    <input type="text" th:field="*{name}" required/>
-    <br/>
-    <label>Date & Time:</label>
-    <input type="datetime-local" th:field="*{dateTime}" required/>
-    <br/>
-    <label>Location:</label>
-    <input type="text" th:field="*{location}" required/>
-    <br/>
-    <button type="submit">Add Event</button>
-</form>
+    <h1 class="mb-4">Add New Event</h1>
 
-<a href="/events">Back to Event List</a>
+    <form action="#" th:action="@{/events/add}" th:object="${event}" method="post">
+        <div class="mb-3">
+            <label for="eventName" class="form-label">Event Name:</label>
+            <input type="text" id="eventName" class="form-control" th:field="*{eventName}" required/>
+        </div>
+
+        <div class="mb-3">
+            <label for="startDateTime" class="form-label">Start Date & Time:</label>
+            <input type="datetime-local" id="startDateTime" class="form-control" th:field="*{startDateTime}" required/>
+        </div>
+
+        <div class="mb-3">
+            <label for="endDateTime" class="form-label">End Date & Time:</label>
+            <input type="datetime-local" id="endDateTime" class="form-control" th:field="*{endDateTime}" required/>
+        </div>
+
+        <div class="mb-3">
+            <label for="organizer" class="form-label">Organizer:</label>
+            <input type="text" id="organizer" class="form-control" th:field="*{organizer}" required/>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description:</label>
+            <textarea id="description" class="form-control" th:field="*{description}" required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Event</button>
+    </form>
+
+    <a href="/events" class="btn btn-secondary mt-3">Back to Event List</a>
+</section>
+
 </body>
 </html>

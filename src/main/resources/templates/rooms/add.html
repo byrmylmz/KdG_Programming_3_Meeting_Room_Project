@@ -1,22 +1,36 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout.html}">
 <head>
     <title>Add Room</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" />
 </head>
 <body>
-<h1>Add Room</h1>
-<form th:action="@{/rooms/add}" th:object="${room}" method="post">
-    <label for="roomNumber">Room Number</label>
-    <input type="text" id="roomNumber" th:field="*{roomNumber}" /><br/>
+<section layout:fragment="content" class="container mt-5">
 
-    <label for="capacity">Capacity</label>
-    <input type="number" id="capacity" th:field="*{capacity}" /><br/>
+    <h1 class="mb-4">Add New Room</h1>
 
-    <label for="type">Type</label>
-    <input type="text" id="type" th:field="*{type}" /><br/>
+    <form th:action="@{/rooms/add}" th:object="${room}" method="post">
+        <div class="mb-3">
+            <label for="roomNumber" class="form-label">Room Number:</label>
+            <input type="text" id="roomNumber" class="form-control" th:field="*{roomNumber}" required />
+        </div>
 
-    <button type="submit">Save</button>
-</form>
-<a th:href="@{/rooms}">Back to Rooms List</a>
+        <div class="mb-3">
+            <label for="capacity" class="form-label">Capacity:</label>
+            <input type="number" id="capacity" class="form-control" th:field="*{capacity}" required />
+        </div>
+
+        <div class="mb-3">
+            <label for="type" class="form-label">Type:</label>
+            <input type="text" id="type" class="form-control" th:field="*{type}" required />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+
+    <a th:href="@{/rooms}" class="btn btn-secondary mt-3">Back to Rooms List</a>
+</section>
+
 </body>
 </html>

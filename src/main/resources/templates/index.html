@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout.html}">
+<head>
+    <title>Content page</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div th:insert="~{dashboard :: dashboard(totalRoomNumber=${totalRoomNumber}, totalBuildingNumber=${totalBuildingNumber}, totalEventNumber=${totalEventNumber})}"></div>
+</section>
+</body>
+</html>

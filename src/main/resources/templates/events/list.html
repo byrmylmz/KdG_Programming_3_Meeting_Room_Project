@@ -1,28 +1,39 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout.html}">
 <head>
     <title>Event List</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" />
 </head>
 <body>
-<h1>All Events</h1>
+<section layout:fragment="content" class="container mt-5">
 
-<table>
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Date & Time</th>
-        <th>Location</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="event : ${events}">
-        <td th:text="${event.name}"></td>
-        <td th:text="${event.dateTime}"></td>
-        <td th:text="${event.location}"></td>
-    </tr>
-    </tbody>
-</table>
+    <h1 class="mb-4">All Events</h1>
+    <table class="table table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>Name</th>
+            <th>Organizer</th>
+            <th>Description</th>
+            <th>Start Date & Time</th>
+            <th>End Date & Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="event : ${events}">
+            <td th:text="${event.eventName}"></td>
+            <td th:text="${event.organizer}"></td>
+            <td th:text="${event.description}"></td>
+            <td th:text="${#temporals.format(event.startDateTime, 'yyyy-MM-dd HH:mm')}"></td>
+            <td th:text="${#temporals.format(event.endDateTime, 'yyyy-MM-dd HH:mm')}"></td>
+        </tr>
+        </tbody>
+    </table>
 
-<a href="/events/add">Add New Event</a>
+
+
+    <a href="/events/add" class="btn btn-primary mt-3">Add New Event</a>
+</section>
+
 </body>
 </html>
