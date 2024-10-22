@@ -1,16 +1,13 @@
 <!DOCTYPE html>
-<html lang="en"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="layout">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout.html}">
 <head>
-    <title th:fragment="pageTitle">HomePage</title>
+    <title>Content page</title>
+    <script src="content-script.js"></script>
 </head>
 <body>
-
-<div layout:fragment="content">
-    <h2>22452442256</h2>
-    <p>Main Page.</p>
-</div>
-
+<section layout:fragment="content">
+    <p>This is a paragraph from the content page</p>
+</section>
 </body>
 </html>
