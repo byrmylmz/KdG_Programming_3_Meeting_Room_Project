@@ -1,13 +1,16 @@
 package be.kdg.event.service.Impl;
 
+import be.kdg.event.mappers.BuildingMapper;
 import be.kdg.event.model.Building;
 import be.kdg.event.repository.BuildingRepository;
 import be.kdg.event.service.BuildingService;
+import be.kdg.event.viewmodels.BuildingViewModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class BuildingServiceImpl implements BuildingService {
@@ -47,9 +50,16 @@ public class BuildingServiceImpl implements BuildingService {
     }
 
     @Override
-    public void addBuilding(Building building) {
-        logger.debug("Adding a new building: {}", building);
-        buildingRepository.save(building);
-        logger.info("Building has been added successfully.");
+    public void addBuilding(BuildingViewModel viewModel) {
+        logger.debug("Adding a new building: {}", viewModel);
+        Building building = BuildingMapper.toEntity(viewModel);
+        if(Objects.nonNull(building)) {
+            buildingRepository.save(building);
+            logger.info("Building has been added successfully.");
+        }else {
+            logger.error("Building could not saved.");
+        }
+
+
     }
 }
