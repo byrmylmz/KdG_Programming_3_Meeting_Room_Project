@@ -3,6 +3,7 @@ package be.kdg.event.controller;
 import be.kdg.event.dto.EventDto;
 import be.kdg.event.model.Event;
 import be.kdg.event.service.EventService;
+import be.kdg.event.viewmodels.EventViewModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,13 +42,13 @@ public class EventController {
 
     @GetMapping("/events/add")
     public String addEventForm(Model model) {
-        model.addAttribute("event", new Event());
+        model.addAttribute("event", new EventViewModel());
         return "events/add";
     }
 
     @PostMapping("/events/add")
-    public String addEvent(Event event) {
-        eventService.addEvent(event);
+    public String addEvent(EventViewModel viewModel) {
+        eventService.addEvent(viewModel);
         return "redirect:/events";
     }
 

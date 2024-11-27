@@ -2,6 +2,7 @@ package be.kdg.event.controller;
 
 import be.kdg.event.model.Room;
 import be.kdg.event.service.RoomService;
+import be.kdg.event.viewmodels.RoomViewModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,12 +24,12 @@ public class RoomController {
 
     @GetMapping("/add")
     public String addRoomForm(Model model) {
-        model.addAttribute("room", new Room());
+        model.addAttribute("room", new RoomViewModel());
         return "rooms/add";
     }
 
     @PostMapping("/add")
-    public String saveRoom(@ModelAttribute Room room) {
+    public String saveRoom(@ModelAttribute RoomViewModel room) {
         roomService.saveRoom(room);
         return "redirect:/rooms";
     }
@@ -41,7 +42,7 @@ public class RoomController {
     }
 
     @PostMapping("/edit/{id}")
-    public String updateRoom(@PathVariable Long id, @ModelAttribute Room room) {
+    public String updateRoom(@PathVariable Long id, @ModelAttribute RoomViewModel room) {
         room.setRoomID(id);
         roomService.saveRoom(room);
         return "redirect:/rooms";

@@ -1,13 +1,16 @@
 package be.kdg.event.service.Impl;
 
+import be.kdg.event.mappers.RoomMapper;
 import be.kdg.event.model.Room;
 import be.kdg.event.repository.RoomRepository;
 import be.kdg.event.service.RoomService;
+import be.kdg.event.viewmodels.RoomViewModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class RoomServiceImpl implements RoomService {
@@ -38,11 +41,17 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public Room saveRoom(Room room) {
+    public void saveRoom(RoomViewModel room) {
         logger.debug("Saving room: {}", room);
-        Room savedRoom = roomRepository.save(room);
-        logger.info("Room with ID {} has been saved successfully.", savedRoom.getRoomID());
-        return savedRoom;
+        System.out.println("Saving room: " + room);
+        Room roomSave = RoomMapper.toEntity(room);
+        if (Objects.nonNull(roomSave)) {
+            Room savedRoom = roomRepository.save(roomSave);
+            logger.info("Room with ID {} has been saved successfully.", savedRoom.getRoomID());
+        } else {
+            logger.error("Room could not be saved.");
+        }
+
     }
 
     @Override

@@ -1,8 +1,10 @@
 package be.kdg.event.service.Impl;
 
+import be.kdg.event.mappers.EventMapper;
 import be.kdg.event.model.Event;
 import be.kdg.event.repository.EventRepository;
 import be.kdg.event.service.EventService;
+import be.kdg.event.viewmodels.EventViewModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -27,8 +29,9 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void addEvent(Event event) {
-        logger.debug("Adding a new event: {}", event);
+    public void addEvent(EventViewModel viewModel) {
+        logger.debug("Adding a new viewModel: {}", viewModel);
+        Event event = EventMapper.toEntity(viewModel);
         eventRepository.save(event);
         logger.info("Event with ID {} has been added successfully.", event.getEventID());
     }
