@@ -13,17 +13,20 @@
     <form th:action="@{/rooms/add}" th:object="${room}" method="post">
         <div class="mb-3">
             <label for="roomNumber" class="form-label">Room Number:</label>
-            <input type="text" id="roomNumber" class="form-control" th:field="*{roomNumber}" required />
+            <input type="text" id="roomNumber" class="form-control" th:field="*{roomNumber}" />
+            <div class="text-danger" th:if="${#fields.hasErrors('roomNumber')}" th:errors="*{roomNumber}"></div>
         </div>
 
         <div class="mb-3">
             <label for="capacity" class="form-label">Capacity:</label>
-            <input type="number" id="capacity" class="form-control" th:field="*{capacity}" required />
+            <input type="number" id="capacity" class="form-control" th:field="*{capacity}" />
+            <div class="text-danger" th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}"></div>
         </div>
 
         <div class="mb-3">
             <label for="type" class="form-label">Type:</label>
-            <input type="text" id="type" class="form-control" th:field="*{type}" required />
+            <input type="text" id="type" class="form-control" th:field="*{type}" />
+            <div class="text-danger" th:if="${#fields.hasErrors('type')}" th:errors="*{type}"></div>
         </div>
 
         <button type="submit" class="btn btn-primary">Save</button>

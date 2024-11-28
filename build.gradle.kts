@@ -46,6 +46,8 @@ dependencies {
 
     implementation ("org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE")
 
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+
 
 
 }

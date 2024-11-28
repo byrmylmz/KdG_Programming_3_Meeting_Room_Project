@@ -13,27 +13,32 @@
     <form action="#" th:action="@{/events/add}" th:object="${event}" method="post">
         <div class="mb-3">
             <label for="eventName" class="form-label">Event Name:</label>
-            <input type="text" id="eventName" class="form-control" th:field="*{eventName}" required/>
+            <input type="text" id="eventName" class="form-control" th:field="*{eventName}" />
+            <div class="text-danger" th:if="${#fields.hasErrors('eventName')}" th:errors="*{eventName}"></div>
         </div>
 
         <div class="mb-3">
-            <label for="startDateTime" class="form-label">Start Date & Time:</label>
-            <input type="datetime-local" id="startDateTime" class="form-control" th:field="*{startDateTime}" required/>
+            <label for="startDateTime" class="form-label">Start Date and Time:</label>
+            <input type="datetime-local" id="startDateTime" class="form-control" th:field="*{startDateTime}" />
+            <div class="text-danger" th:if="${#fields.hasErrors('startDateTime')}" th:errors="*{startDateTime}"></div>
         </div>
 
         <div class="mb-3">
-            <label for="endDateTime" class="form-label">End Date & Time:</label>
-            <input type="datetime-local" id="endDateTime" class="form-control" th:field="*{endDateTime}" required/>
+            <label for="endDateTime" class="form-label">End Date and Time:</label>
+            <input type="datetime-local" id="endDateTime" class="form-control" th:field="*{endDateTime}" />
+            <div class="text-danger" th:if="${#fields.hasErrors('endDateTime')}" th:errors="*{endDateTime}"></div>
         </div>
 
         <div class="mb-3">
             <label for="organizer" class="form-label">Organizer:</label>
-            <input type="text" id="organizer" class="form-control" th:field="*{organizer}" required/>
+            <input type="text" id="organizer" class="form-control" th:field="*{organizer}" />
+            <div class="text-danger" th:if="${#fields.hasErrors('organizer')}" th:errors="*{organizer}"></div>
         </div>
 
         <div class="mb-3">
             <label for="description" class="form-label">Description:</label>
-            <textarea id="description" class="form-control" th:field="*{description}" required></textarea>
+            <textarea id="description" class="form-control" th:field="*{description}"></textarea>
+            <div class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
         </div>
 
         <button type="submit" class="btn btn-primary">Add Event</button>
