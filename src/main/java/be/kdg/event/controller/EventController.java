@@ -3,7 +3,9 @@ package be.kdg.event.controller;
 import be.kdg.event.dto.EventDto;
 import be.kdg.event.model.Event;
 import be.kdg.event.service.EventService;
+import be.kdg.event.service.SessionHistoryService;
 import be.kdg.event.viewmodels.EventViewModel;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,14 +22,18 @@ import java.util.stream.Collectors;
 public class EventController {
 
     private final EventService eventService;
+    private final SessionHistoryService sessionHistoryService;
 
     @Autowired
-    public EventController(EventService eventService) {
+    public EventController(EventService eventService, SessionHistoryService sessionHistoryService) {
         this.eventService = eventService;
+        this.sessionHistoryService = sessionHistoryService;
     }
 
     @GetMapping("/events")
-    public String listEvents(Model model) {
+    public String listEvents(Model model, HttpSession session) {
+        sessionHistoryService.trackPageVisit(session, "/events");
+
         List<Event> events = eventService.getAllEvents();
         List<EventDto> eventDtos = events.stream()
                 .map(event -> EventDto.builder()
@@ -44,7 +50,8 @@ public class EventController {
     }
 
     @GetMapping("/events/add")
-    public String addEventForm(Model model) {
+    public String addEventForm(Model model,HttpSession session) {
+        sessionHistoryService.trackPageVisit(session, "/events/add");
         model.addAttribute("event", new EventViewModel());
         return "events/add";
     }

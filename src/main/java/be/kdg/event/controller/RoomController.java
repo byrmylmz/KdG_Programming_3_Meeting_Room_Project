@@ -2,7 +2,9 @@ package be.kdg.event.controller;
 
 import be.kdg.event.model.Room;
 import be.kdg.event.service.RoomService;
+import be.kdg.event.service.SessionHistoryService;
 import be.kdg.event.viewmodels.RoomViewModel;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,20 +18,27 @@ import org.springframework.web.bind.annotation.*;
 public class RoomController {
 
     private final RoomService roomService;
+    private final SessionHistoryService sessionHistoryService;
+
 
     @Autowired
-    public RoomController(RoomService roomService) {
+    public RoomController(RoomService roomService, SessionHistoryService sessionHistoryService) {
         this.roomService = roomService;
+        this.sessionHistoryService = sessionHistoryService;
     }
 
     @GetMapping
-    public String getAllRooms(Model model) {
+    public String getAllRooms(Model model, HttpSession session) {
+        sessionHistoryService.trackPageVisit(session, "/rooms");
+
         model.addAttribute("rooms", roomService.getAllRooms());
         return "rooms/list";
     }
 
     @GetMapping("/add")
-    public String addRoomForm(Model model) {
+    public String addRoomForm(Model model,HttpSession session) {
+        sessionHistoryService.trackPageVisit(session, "/rooms/add");
+
         model.addAttribute("room", new RoomViewModel());
         return "rooms/add";
     }

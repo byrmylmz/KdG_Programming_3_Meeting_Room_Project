@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout.html}">
+<head>
+    <title>Session History</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" />
+</head>
+<body>
+<section layout:fragment="content" class="container mt-5">
+    <h1 class="mb-4">Session History</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Page URL</th>
+            <th>Visited At</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="history : ${sessionHistory}">
+            <td th:text="${history.pageUrl}"></td>
+            <td th:text="${history.timestamp}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="/" class="btn btn-secondary mt-3">Back to Home</a>
+</section>
+</body>
+</html>
