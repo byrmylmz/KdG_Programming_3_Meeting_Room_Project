@@ -24,41 +24,61 @@ public class RoomServiceImpl implements RoomService {
     @Override
     public List<Room> getAllRooms() {
         logger.debug("Fetching all rooms from the database.");
-        List<Room> rooms = roomRepository.findAll();
-        logger.debug("Found {} rooms.", rooms.size());
-        return rooms;
+        try {
+            List<Room> rooms = roomRepository.findAll();
+            logger.debug("Found {} rooms.", rooms.size());
+            return rooms;
+        } catch (Exception e) {
+            logger.error("Failed to fetch rooms: {}", e.getMessage());
+            throw new RuntimeException("Failed to fetch rooms", e);
+        }
     }
 
     @Override
     public Room getRoomById(Long id) {
         logger.debug("Fetching room with ID: {}", id);
-        Room room = roomRepository.findById(id).orElseThrow(() -> {
-            logger.error("Room with ID {} not found", id);
-            return new RuntimeException("Room not found");
-        });
-        logger.info("Room with ID {} found.", id);
-        return room;
+        try {
+            Room room = roomRepository.findById(id);
+            if (room == null) {
+                logger.error("Room with ID {} not found.", id);
+                throw new RuntimeException("Room not found");
+            }
+            logger.info("Room with ID {} found.", id);
+            return room;
+        } catch (Exception e) {
+            logger.error("Error fetching room with ID {}: {}", id, e.getMessage());
+            throw new RuntimeException("Failed to fetch room", e);
+        }
     }
 
     @Override
     public void saveRoom(RoomViewModel room) {
         logger.debug("Saving room: {}", room);
-        System.out.println("Saving room: " + room);
-        Room roomSave = RoomMapper.toEntity(room);
-        if (Objects.nonNull(roomSave)) {
-            Room savedRoom = roomRepository.save(roomSave);
-            logger.info("Room with ID {} has been saved successfully.", savedRoom.getRoomID());
-        } else {
-            logger.error("Room could not be saved.");
+        try {
+            Room roomSave = RoomMapper.toEntity(room);
+            if (Objects.nonNull(roomSave)) {
+                roomRepository.save(roomSave);
+                logger.info("Room has been saved successfully.");
+            } else {
+                logger.error("Room could not be saved. Room entity is null.");
+                throw new RuntimeException("Room could not be saved. Invalid data provided.");
+            }
+        } catch (Exception e) {
+            logger.error("Error saving room: {}", e.getMessage());
+            throw new RuntimeException("Failed to save room", e);
         }
-
     }
 
     @Override
     public void deleteRoom(Long id) {
         logger.debug("Deleting room with ID: {}", id);
         try {
-            roomRepository.deleteById(id);
+            Room room = roomRepository.findById(id);
+            if (room == null) {
+                logger.error("Room with ID {} not found. Cannot delete.", id);
+                throw new RuntimeException("Room not found");
+            }
+            roomRepository.delete(id);
             logger.info("Room with ID {} has been deleted successfully.", id);
         } catch (Exception e) {
             logger.error("Error deleting room with ID {}: {}", id, e.getMessage());

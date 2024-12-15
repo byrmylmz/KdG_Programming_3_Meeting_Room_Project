@@ -25,7 +25,7 @@ public class StatisticsServiceImpl implements StatisticsService {
     public List<Long> getTotalCounts() {
         Long events= eventRepository.countEvents();
         Long rooms = roomRepository.countRoom();
-        Long buildigs= buildingRepository.countBuilding();
+        Long buildigs= buildingRepository.countBuildings();
 
         return Arrays.asList(events,rooms,buildigs);
     }

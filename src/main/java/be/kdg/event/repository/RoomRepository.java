@@ -6,8 +6,17 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public interface RoomRepository extends JpaRepository<Room, Long> {
-    @Query("SELECT COUNT(R) FROM Room R")
+public interface RoomRepository {
+    List<Room> findAll();
+
+    Room findById(Long id);
+
     long countRoom();
+
+    void save(Room room);
+
+    void delete(Long id);
 }

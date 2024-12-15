@@ -9,7 +9,14 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface EventRepository extends JpaRepository<Event, Long> {
-    @Query("SELECT COUNT(E) FROM Event E")
+public interface EventRepository {
+    List<Event> findAll();
+
+    Event findById(Long id);
+
+    void save(Event event);
+
+    void delete(Long id);
+
     long countEvents();
 }

@@ -49,10 +49,10 @@ public class BuildingController {
     public String addBuilding(@Valid @ModelAttribute("building") BuildingViewModel viewModel, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("building", viewModel);
-            return "buildings/add";  // If validation fails, show the form again with error messages
+            return "buildings/add";
         }
 
         buildingService.addBuilding(viewModel);
-        return "redirect:/buildings";  // Redirect to the buildings list page
+        return "redirect:/buildings";
     }
 }

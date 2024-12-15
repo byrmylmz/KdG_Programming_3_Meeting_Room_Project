@@ -1,17 +1,18 @@
 package be.kdg.event.model;
 
-
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
-@Setter
+
 @Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Room {
-    // Getters and Setters
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long roomID;
@@ -25,17 +26,6 @@ public class Room {
     private Building building;
 
     @ManyToMany(mappedBy = "rooms")
+    @ToString.Exclude
     private List<Event> events = new ArrayList<>();
-
-    @Override
-    public String toString() {
-        return "Room{" +
-                "roomID=" + roomID +
-                ", roomNumber='" + roomNumber + '\'' +
-                ", capacity=" + capacity +
-                ", type='" + type + '\'' +
-//                ", building=" + building +
-//                ", events=" + events +
-                '}';
-    }
 }

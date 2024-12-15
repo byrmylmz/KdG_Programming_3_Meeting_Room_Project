@@ -24,42 +24,61 @@ public class BuildingServiceImpl implements BuildingService {
     @Override
     public List<Building> getAllBuildings() {
         logger.debug("Fetching all buildings from the database.");
-        List<Building> buildings = buildingRepository.findAll();
-        logger.debug("Found {} buildings.", buildings.size());
-        return buildings;
+        try {
+            List<Building> buildings = buildingRepository.findAll();
+            logger.debug("Found {} buildings.", buildings.size());
+            return buildings;
+        } catch (Exception e) {
+            logger.error("Failed to fetch buildings: {}", e.getMessage());
+            throw new RuntimeException("Failed to fetch buildings", e);
+        }
     }
 
     @Override
     public Building saveBuilding(Building building) {
         logger.debug("Saving building: {}", building);
-        Building savedBuilding = buildingRepository.save(building);
-        logger.info("Building with ID {} has been saved successfully.", savedBuilding.getBuildingID());
-        return savedBuilding;
+        try {
+            buildingRepository.save(building);
+            logger.info("Building with ID {} has been saved successfully.", building.getBuildingID());
+            return building;
+        } catch (Exception e) {
+            logger.error("Failed to save building: {}", e.getMessage());
+            throw new RuntimeException("Failed to save building", e);
+        }
     }
 
     @Override
     public Building getBuildingById(Long id) {
         logger.debug("Fetching building with ID: {}", id);
-        Building building = buildingRepository.findById(id).orElse(null);
-        if (building != null) {
+        try {
+            Building building = buildingRepository.findById(id);
+            if (building == null) {
+                logger.warn("Building with ID {} not found.", id);
+                throw new RuntimeException("Building not found");
+            }
             logger.info("Building with ID {} found.", id);
-        } else {
-            logger.warn("Building with ID {} not found.", id);
+            return building;
+        } catch (Exception e) {
+            logger.error("Failed to fetch building with ID {}: {}", id, e.getMessage());
+            throw new RuntimeException("Failed to fetch building", e);
         }
-        return building;
     }
 
     @Override
     public void addBuilding(BuildingViewModel viewModel) {
         logger.debug("Adding a new building: {}", viewModel);
-        Building building = BuildingMapper.toEntity(viewModel);
-        if(Objects.nonNull(building)) {
-            buildingRepository.save(building);
-            logger.info("Building has been added successfully.");
-        }else {
-            logger.error("Building could not saved.");
+        try {
+            Building building = BuildingMapper.toEntity(viewModel);
+            if (Objects.nonNull(building)) {
+                buildingRepository.save(building);
+                logger.info("Building has been added successfully.");
+            } else {
+                logger.error("Building could not be saved. Mapped entity is null.");
+                throw new RuntimeException("Building data is invalid");
+            }
+        } catch (Exception e) {
+            logger.error("Failed to add building: {}", e.getMessage());
+            throw new RuntimeException("Failed to add building", e);
         }
-
-
     }
 }

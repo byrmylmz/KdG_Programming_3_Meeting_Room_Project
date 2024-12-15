@@ -10,7 +10,7 @@ version = "0.0.1-SNAPSHOT"
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(23)
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
@@ -21,6 +21,7 @@ application {
 repositories {
     mavenCentral()
 }
+
 
 
 
@@ -48,9 +49,16 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot-starter-validation")
 
+    implementation(files("libs/my-library.jar"))
+
+    implementation ("org.springframework.boot:spring-boot-starter-jdbc")
+    runtimeOnly ("com.h2database:h2")
+
 
 
 }
+
+
 
 tasks.withType<Test> {
     useJUnitPlatform()

@@ -1,13 +1,19 @@
 package be.kdg.event.repository;
 
-
 import be.kdg.event.model.Building;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public interface BuildingRepository extends JpaRepository<Building, Long> {
-    @Query("SELECT COUNT(B) FROM Building B")
-    long countBuilding();
+import java.util.List;
+
+public interface BuildingRepository {
+    List<Building> findAll();
+
+    Building findById(Long id);
+
+    long countBuildings();
+
+    void save(Building building);
+
+    void delete(Long id);
+
+    void update(Building building);
 }

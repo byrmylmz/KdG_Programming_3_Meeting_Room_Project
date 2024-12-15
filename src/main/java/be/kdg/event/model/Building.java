@@ -1,15 +1,16 @@
 package be.kdg.event.model;
 
-
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Setter
 @Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Building {
     @Id
@@ -21,17 +22,6 @@ public class Building {
     private int numberOfFloors;
 
     @OneToMany(mappedBy = "building", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ToString.Exclude
     private List<Room> rooms = new ArrayList<>();
-
-
-    @Override
-    public String toString() {
-        return "Building{" +
-                "buildingID=" + buildingID +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", numberOfFloors=" + numberOfFloors +
-//                ", rooms=" + rooms +
-                '}';
-    }
 }

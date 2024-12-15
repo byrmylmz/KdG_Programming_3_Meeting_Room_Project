@@ -2,14 +2,16 @@ package be.kdg.event.model;
 
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 public class Event {
     // Getters and Setters
@@ -31,16 +33,4 @@ public class Event {
     )
     private List<Room> rooms = new ArrayList<>();
 
-    @Override
-    public String toString() {
-        return "Event{" +
-                "eventID=" + eventID +
-                ", eventName='" + eventName + '\'' +
-                ", startDateTime=" + startDateTime +
-                ", endDateTime=" + endDateTime +
-                ", organizer='" + organizer + '\'' +
-                ", description='" + description + '\'' +
-//                ", rooms=" + rooms +
-                '}';
-    }
 }
