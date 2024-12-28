@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@Profile("jdbc")
 public class EventServiceImpl implements EventService {
     private static final Logger logger = LoggerFactory.getLogger(EventServiceImpl.class);
     private final EventRepository eventRepository;

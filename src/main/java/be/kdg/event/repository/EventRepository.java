@@ -1,25 +1,25 @@
-package be.kdg.event.repository;
+    package be.kdg.event.repository;
 
 
-import be.kdg.event.model.Event;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
+    import be.kdg.event.model.Event;
+    import org.springframework.data.jpa.repository.JpaRepository;
+    import org.springframework.data.jpa.repository.Query;
+    import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Optional;
+    import java.util.List;
+    import java.util.Optional;
 
-@Repository
-public interface EventRepository {
-    List<Event> findAll();
+    @Repository
+    public interface EventRepository {
+        List<Event> findAll();
 
-    Optional<Event> findById(Long id);
+        Optional<Event> findById(Long id);
 
-    void save(Event event);
+        void save(Event event);
 
-    void delete(Long id);
+        void delete(Long id);
 
-    long countEvents();
+        long countEvents();
 
-    void update(Event event);
-}
+        void update(Event event);
+    }

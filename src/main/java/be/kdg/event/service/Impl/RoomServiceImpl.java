@@ -16,7 +16,6 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
-@Profile("jdbc")
 public class RoomServiceImpl implements RoomService {
     private static final Logger logger = LoggerFactory.getLogger(RoomServiceImpl.class);
     private final RoomRepository roomRepository;

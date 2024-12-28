@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
-@Profile("jdbc")
 public class BuildingServiceImpl implements BuildingService {
     private static final Logger logger = LoggerFactory.getLogger(BuildingServiceImpl.class);
     private final BuildingRepository buildingRepository;

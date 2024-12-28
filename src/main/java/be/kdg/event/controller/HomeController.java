@@ -25,9 +25,9 @@ public class HomeController {
         sessionHistoryService.trackPageVisit(session, "/home");
 
         List<Long> counts = statisticsService.getTotalCounts();
-        model.addAttribute("totalRoomNumber", counts.getFirst());
-        model.addAttribute("totalBuildingNumber", counts.get(1));
-        model.addAttribute("totalEventNumber", counts.get(2));
+        model.addAttribute("totalEventNumber", counts.getFirst());
+        model.addAttribute("totalRoomNumber", counts.get(1));
+        model.addAttribute("totalBuildingNumber", counts.get(2));
         return "index";
     }
 
