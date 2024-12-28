@@ -5,27 +5,39 @@ import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long roomID;
+    private Long id;
+    private String name;
+    private String number;
+    private Integer capacity;
 
-    private String roomNumber;
-    private int capacity;
-    private String type;
 
-    @ManyToOne
-    @JoinColumn(name = "building_id")
     private Building building;
 
-    @ManyToMany(mappedBy = "rooms")
-    @ToString.Exclude
+
     private List<Event> events = new ArrayList<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Room room = (Room) o;
+        return Objects.equals(id, room.id) &&
+                Objects.equals(name, room.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
+    }
+
 }

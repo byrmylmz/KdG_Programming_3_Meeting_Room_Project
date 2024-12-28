@@ -2,15 +2,15 @@
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout.html}">
 <head>
-    <title>Add Building</title>
+    <title>Update Building</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" />
 </head>
 <body>
 <section layout:fragment="content" class="container mt-5">
 
-    <h1 class="mb-4">Add New Building</h1>
+    <h1 class="mb-4">Update Building</h1>
 
-    <form action="#" th:action="@{/buildings/add}" th:object="${building}" method="post">
+    <form action="#" th:action="@{/buildings/update/{id}(id=${building.id})}" th:object="${building}" method="post">
         <div class="mb-3">
             <label for="name" class="form-label">Name:</label>
             <input type="text" id="name" class="form-control" th:field="*{name}" required/>
@@ -23,7 +23,8 @@
             <div class="text-danger" th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></div>
         </div>
 
-        <button type="submit" class="btn btn-primary">Add Building</button>
+
+        <button type="submit" class="btn btn-primary">Update Building</button>
     </form>
 
     <a href="/buildings" class="btn btn-secondary mt-3">Back to Building List</a>

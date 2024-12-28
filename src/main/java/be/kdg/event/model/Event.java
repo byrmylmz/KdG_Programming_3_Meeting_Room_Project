@@ -1,6 +1,7 @@
 package be.kdg.event.model;
 
 
+import be.kdg.event.viewmodels.RoomViewModel;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,25 +13,18 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 public class Event {
     // Getters and Setters
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long eventID;
+    private Long id;
 
-    private String eventName;
+    private String name;
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
-    private String organizer;
-    private String description;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "event_room",
-            joinColumns = @JoinColumn(name = "event_id"),
-            inverseJoinColumns = @JoinColumn(name = "room_id")
-    )
-    private List<Room> rooms = new ArrayList<>();
+
+    private List<Long> roomIdList;
+
 
 }

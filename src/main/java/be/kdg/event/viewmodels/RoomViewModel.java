@@ -8,16 +8,19 @@ import lombok.Data;
 
 @Data
 public class RoomViewModel {
-    private Long roomID;
+    private Long id;
+
+    @NotBlank(message = "Name type is required")
+    private String name;
 
     @NotBlank(message = "Room number is required")
     @Size(min = 1, max = 10, message = "Room number must be between 1 and 10 characters")
-    private String roomNumber;
+    private String Number;
 
     @NotNull(message = "Capacity is required")
     @Min(value = 1, message = "Capacity must be at least 1")
     private int capacity;
 
-    @NotBlank(message = "Room type is required")
-    private String type;
+    private BuildingViewModel building;
+
 }

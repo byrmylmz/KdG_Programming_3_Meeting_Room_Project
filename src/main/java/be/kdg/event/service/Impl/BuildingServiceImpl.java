@@ -7,12 +7,14 @@ import be.kdg.event.service.BuildingService;
 import be.kdg.event.viewmodels.BuildingViewModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
 
 @Service
+@Profile("jdbc")
 public class BuildingServiceImpl implements BuildingService {
     private static final Logger logger = LoggerFactory.getLogger(BuildingServiceImpl.class);
     private final BuildingRepository buildingRepository;
@@ -39,7 +41,7 @@ public class BuildingServiceImpl implements BuildingService {
         logger.debug("Saving building: {}", building);
         try {
             buildingRepository.save(building);
-            logger.info("Building with ID {} has been saved successfully.", building.getBuildingID());
+            logger.info("Building with ID {} has been saved successfully.", building.getId());
             return building;
         } catch (Exception e) {
             logger.error("Failed to save building: {}", e.getMessage());
@@ -81,4 +83,48 @@ public class BuildingServiceImpl implements BuildingService {
             throw new RuntimeException("Failed to add building", e);
         }
     }
+
+    @Override
+    public Building updateBuilding(Long id, BuildingViewModel viewModel) {
+        logger.debug("Updating building with ID: {}", id);
+
+        try {
+            Building existingBuilding = buildingRepository.findById(id);
+            if (existingBuilding == null) {
+                logger.warn("Building with ID {} not found.", id);
+                throw new RuntimeException("Building not found");
+            }
+
+            Building updatedBuilding = BuildingMapper.toEntity(viewModel);
+
+            buildingRepository.update(updatedBuilding);
+
+            logger.info("Building with ID {} has been updated successfully.", id);
+            return updatedBuilding;
+
+        } catch (Exception e) {
+            logger.error("Failed to update building with ID {}: {}", id, e.getMessage());
+            throw new RuntimeException("Failed to update building", e);
+        }
+    }
+
+    @Override
+    public void deleteBuilding(Long id) {
+        logger.debug("Attempting to delete building with ID: {}", id);
+        try {
+            Building building = buildingRepository.findById(id);
+            if (building == null) {
+                logger.warn("Building with ID {} not found. Deletion cancelled.", id);
+                throw new RuntimeException("Building not found");
+            }
+            buildingRepository.delete(id);
+            logger.info("Building with ID {} has been successfully deleted.", id);
+        } catch (Exception e) {
+            logger.error("Failed to delete building with ID {}: {}", id, e.getMessage());
+            throw new RuntimeException("Failed to delete building", e);
+        }
+    }
+
+
+
 }

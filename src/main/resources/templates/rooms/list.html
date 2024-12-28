@@ -7,29 +7,34 @@
 </head>
 <body>
 <section layout:fragment="content" class="container mt-5">
-
     <h1 class="mb-4">All Rooms</h1>
     <a th:href="@{/rooms/add}" class="btn btn-primary mb-3">Add New Room</a>
-
     <table class="table table-striped">
         <thead class="table-dark">
         <tr>
+            <th>Room ID</th>
+            <th>Room Name</th>
             <th>Room Number</th>
             <th>Capacity</th>
-            <th>Type</th>
-
+            <th>Actions</th> <!-- Added Actions column -->
         </tr>
         </thead>
         <tbody>
         <tr th:each="room : ${rooms}">
-            <td th:text="${room.roomNumber}"></td>
+            <td th:text="${room.id}"></td>
+            <td th:text="${room.name}"></td>
+            <td th:text="${room.number}"></td>
             <td th:text="${room.capacity}"></td>
-            <td th:text="${room.type}"></td>
-
+            <td>
+                <!-- Action Buttons -->
+                <a th:href="@{/rooms/update/{id}(id=${room.id})}" class="btn btn-warning btn-sm me-2">Update</a>
+                <a th:href="@{/rooms/delete/{id}(id=${room.id})}" class="btn btn-danger btn-sm"
+                   onclick="return confirm('Are you sure you want to delete this room?');">Delete</a>
+                <a th:href="@{/rooms/view/{id}(id=${room.id})}" class="btn btn-info btn-sm me-2">View Events</a>
+            </td>
         </tr>
         </tbody>
     </table>
 </section>
-
 </body>
 </html>

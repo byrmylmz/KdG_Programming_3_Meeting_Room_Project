@@ -26,15 +26,25 @@ public class RoomCollectionRepository implements RoomRepository {
 
     @Override
     public void save(Room room) {
-        if (room.getRoomID() == null) {
-            room.setRoomID(idCounter++);
+        if (room.getId() == null) {
+            room.setId(idCounter++);
         }
-        roomStore.put(room.getRoomID(), room);
+        roomStore.put(room.getId(), room);
     }
 
     @Override
     public void delete(Long id) {
         roomStore.remove(id);
+    }
+
+    @Override
+    public void update(Room room) {
+
+    }
+
+    @Override
+    public Room findByRoomIdWithEvents(Long roomId) {
+        return null;
     }
 
     @Override

@@ -1,7 +1,10 @@
 package be.kdg.event.mappers;
 
 import be.kdg.event.model.Event;
+import be.kdg.event.model.Room;
 import be.kdg.event.viewmodels.EventViewModel;
+
+import java.util.stream.Collectors;
 
 public class EventMapper {
 
@@ -10,12 +13,11 @@ public class EventMapper {
             return null;
         }
         EventViewModel viewModel = new EventViewModel();
-        viewModel.setEventID(event.getEventID());
-        viewModel.setEventName(event.getEventName());
+        viewModel.setId(event.getId());
+        viewModel.setName(event.getName());
         viewModel.setStartDateTime(event.getStartDateTime());
         viewModel.setEndDateTime(event.getEndDateTime());
-        viewModel.setOrganizer(event.getOrganizer());
-        viewModel.setDescription(event.getDescription());
+        viewModel.setRoomIdList(event.getRoomIdList());
         return viewModel;
     }
     public static Event toEntity(EventViewModel viewModel) {
@@ -23,12 +25,11 @@ public class EventMapper {
             return null;
         }
         Event event = new Event();
-        event.setEventID(viewModel.getEventID());
-        event.setEventName(viewModel.getEventName());
+        event.setId(viewModel.getId());
+        event.setName(viewModel.getName());
         event.setStartDateTime(viewModel.getStartDateTime());
         event.setEndDateTime(viewModel.getEndDateTime());
-        event.setOrganizer(viewModel.getOrganizer());
-        event.setDescription(viewModel.getDescription());
+        event.setRoomIdList(viewModel.getRoomIdList());
         return event;
     }
 }

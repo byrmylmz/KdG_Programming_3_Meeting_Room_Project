@@ -12,10 +12,11 @@ public class RoomMapper {
             return null;
         }
         Room room = new Room();
-        room.setRoomNumber(viewModel.getRoomNumber());
-        room.setType(viewModel.getType());
+        room.setId(viewModel.getId());
+        room.setName(viewModel.getName());
+        room.setNumber(viewModel.getNumber());
         room.setCapacity(viewModel.getCapacity());
-        room.setRoomID(viewModel.getRoomID());
+        room.setBuilding(BuildingMapper.toEntity(viewModel.getBuilding()));
         return room;
     }
 
@@ -24,10 +25,11 @@ public class RoomMapper {
             return null;
         }
         RoomViewModel viewModel = new RoomViewModel();
-        viewModel.setRoomNumber(room.getRoomNumber());
-        viewModel.setType(room.getType());
+        viewModel.setId(room.getId());
+        viewModel.setName(room.getName());
+        viewModel.setNumber(room.getNumber());
         viewModel.setCapacity(room.getCapacity());
-        viewModel.setRoomID(room.getRoomID());
+        viewModel.setBuilding(BuildingMapper.toViewModel(room.getBuilding()));
         return viewModel;
 
     }

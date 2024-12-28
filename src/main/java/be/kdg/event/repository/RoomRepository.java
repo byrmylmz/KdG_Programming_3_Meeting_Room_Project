@@ -19,4 +19,8 @@ public interface RoomRepository {
     void save(Room room);
 
     void delete(Long id);
+
+    void update(Room room);
+
+    Room findByRoomIdWithEvents(Long roomId);
 }

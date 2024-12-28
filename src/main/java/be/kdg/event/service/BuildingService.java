@@ -12,4 +12,8 @@ public interface BuildingService {
     Building saveBuilding(Building building);
     Building getBuildingById(Long id);
     void addBuilding(BuildingViewModel viewModel);
+
+    Building updateBuilding(Long id, BuildingViewModel viewModel);
+
+    void deleteBuilding(Long id);
 }

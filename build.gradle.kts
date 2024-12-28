@@ -54,6 +54,8 @@ dependencies {
     implementation ("org.springframework.boot:spring-boot-starter-jdbc")
     runtimeOnly ("com.h2database:h2")
 
+    implementation("org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE")
+
 
 
 }

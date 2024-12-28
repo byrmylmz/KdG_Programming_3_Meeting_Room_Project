@@ -8,39 +8,39 @@
 <body>
 <section layout:fragment="content" class="container mt-5">
 
-    <h1 class="mb-4">Add New Event</h1>
-
-    <form action="#" th:action="@{/events/add}" th:object="${event}" method="post">
+    <h1 class="mb-4">UpdateEvent</h1>
+    <form th:action="@{/events/update/{id}(id=${event.id})}" th:object="${event}" method="post">
         <div class="mb-3">
             <label for="eventName" class="form-label">Event Name:</label>
-            <input type="text" id="eventName" class="form-control" th:field="*{name}"/>
+            <input type="text" id="eventName" class="form-control" th:field="*{name}" aria-label="Enter event name"/>
             <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
         </div>
 
         <div class="mb-3">
             <label for="startDateTime" class="form-label">Start Date and Time:</label>
-            <input type="datetime-local" id="startDateTime" class="form-control" th:field="*{startDateTime}"/>
+            <input type="datetime-local" id="startDateTime" class="form-control" th:field="*{startDateTime}"
+                   th:value="${event.startDateTime}" aria-label="Select start date and time"/>
             <div class="text-danger" th:if="${#fields.hasErrors('startDateTime')}" th:errors="*{startDateTime}"></div>
         </div>
 
         <div class="mb-3">
             <label for="endDateTime" class="form-label">End Date and Time:</label>
-            <input type="datetime-local" id="endDateTime" class="form-control" th:field="*{endDateTime}"/>
+            <input type="datetime-local" id="endDateTime" class="form-control" th:field="*{endDateTime}"
+                   th:value="${event.endDateTime}" aria-label="Select end date and time"/>
             <div class="text-danger" th:if="${#fields.hasErrors('endDateTime')}" th:errors="*{endDateTime}"></div>
         </div>
-
         <div class="mb-3">
             <label for="rooms" class="form-label">Rooms:</label>
-                <select id="rooms" class="form-select" th:field="*{roomIdList}" multiple>
-                <option th:each="room : ${rooms}" th:value="${room.id}" th:text="${room.name}"></option>
+            <select id="rooms" class="form-select" th:field="*{roomIdList}" multiple
+                    aria-label="Select rooms for event">
+                <option th:each="room : ${allRooms}" th:value="${room.id}" th:text="${room.name}"
+                        th:selected="${#lists.contains(selectedRoomIds, room)}"></option>
             </select>
         </div>
-
-        <button type="submit" class="btn btn-primary">Add Event</button>
+        <button type="submit" class="btn btn-primary">Update Event</button>
     </form>
 
     <a href="/events" class="btn btn-secondary mt-3">Back to Event List</a>
 </section>
-
 </body>
 </html>

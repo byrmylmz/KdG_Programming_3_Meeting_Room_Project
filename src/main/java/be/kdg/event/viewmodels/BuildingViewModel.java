@@ -9,7 +9,7 @@ import lombok.Data;
 
 @Data
 public class BuildingViewModel {
-    private Long buildingID;
+    private Long id;
 
     @NotBlank(message = "Building name cannot be empty")
     @Size(min = 3, max = 100, message = "Building name must be between 3 and 100 characters")
@@ -19,7 +19,5 @@ public class BuildingViewModel {
     @Size(min = 5, max = 200, message = "Address must be between 5 and 200 characters")
     private String address;
 
-    @NotNull(message = "Number of floors cannot be null")
-    @Min(value = 1, message = "Building must have at least 1 floor")
-    private Integer numberOfFloors;
+
 }

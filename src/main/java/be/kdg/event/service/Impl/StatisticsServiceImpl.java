@@ -4,12 +4,14 @@ import be.kdg.event.repository.BuildingRepository;
 import be.kdg.event.repository.EventRepository;
 import be.kdg.event.repository.RoomRepository;
 import be.kdg.event.service.StatisticsService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
 
 @Service
+@Profile("jdbc")
 public class StatisticsServiceImpl implements StatisticsService {
     private final EventRepository eventRepository;
     private final RoomRepository roomRepository;

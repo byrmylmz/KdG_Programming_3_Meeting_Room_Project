@@ -7,13 +7,10 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Repository
-@Primary
+@Profile("memory")
 public class EventCollectionRepository implements EventRepository {
     private final Map<Long, Event> eventStore = new HashMap<>();
     private long idCounter = 1;
@@ -25,8 +22,8 @@ public class EventCollectionRepository implements EventRepository {
     private void init() {
         List<Event> events = EventStaticData.events;
         for (Event event : events) {
-            eventStore.put(event.getEventID(), event);
-            idCounter = Math.max(idCounter, event.getEventID() + 1);
+            eventStore.put(event.getId(), event);
+            idCounter = Math.max(idCounter, event.getId() + 1);
         }
     }
 
@@ -36,16 +33,16 @@ public class EventCollectionRepository implements EventRepository {
     }
 
     @Override
-    public Event findById(Long id) {
-        return eventStore.get(id);
+    public Optional<Event> findById(Long id) {
+        return Optional.ofNullable(eventStore.get(id));
     }
 
     @Override
     public void save(Event event) {
-        if (event.getEventID() == null) {
-            event.setEventID(idCounter++);
+        if (event.getId() == null) {
+            event.setId(idCounter++);
         }
-        eventStore.put(event.getEventID(), event);
+        eventStore.put(event.getId(), event);
     }
 
     @Override
@@ -55,5 +52,10 @@ public class EventCollectionRepository implements EventRepository {
     @Override
     public long countEvents() {
         return eventStore.size();
+    }
+
+    @Override
+    public void update(Event event) {
+
     }
 }

@@ -3,6 +3,7 @@ package be.kdg.event.controller;
 import be.kdg.event.service.SessionHistoryService;
 import be.kdg.event.service.StatisticsService;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,3 +34,4 @@ public class HomeController {
 
 
 }
+

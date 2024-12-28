@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout.html}">
+<head>
+    <title>Room List</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" />
+</head>
+<body>
+<section layout:fragment="content" class="container mt-5">
+
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title" th:text="'Building Details: Building ID ' + ${building.getId()}"></h5>
+            <p class="card-text">
+                <strong>Building Name:</strong> <span th:text="${building.getName()}"></span><br>
+                <strong>Total Rooms:</strong> <span th:text="${#lists.size(rooms)}"></span><br>
+                <strong>Building Address:</strong> <span th:text="${building.getAddress()}"></span>
+            </p>
+
+        </div>
+    </div>
+    <table class="table table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>Room ID</th>
+            <th>Room Name</th>
+            <th>Room Number</th>
+            <th>Room Capacity</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="room : ${rooms}">
+            <td th:text="${room.getId()}"></td>
+            <td th:text="${room.getName()}"></td>
+            <td th:text="${room.getNumber()}"></td>
+            <td th:text="${room.getCapacity()}"></td>
+            <td>
+                <a th:href="@{/rooms/update/{id}(id=${room.id})}" class="btn btn-warning btn-sm">Update</a>
+                <a th:href="@{/rooms/delete/{id}(id=${room.id})}" class="btn btn-danger btn-sm"
+                   onclick="return confirm('Are you sure you want to delete this room?');">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a th:href="@{/rooms/add/{id}(id=${building.id})}" class="btn btn-primary mt-3">Add New Room</a>
+    <a href="/buildings" class="btn btn-secondary mt-3">Back to Buildings</a>
+
+</section>
+</body>
+</html>

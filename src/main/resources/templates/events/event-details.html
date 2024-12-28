@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout.html}">
+<head>
+  <title>Event Details</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" />
+</head>
+<body>
+<section layout:fragment="content" class="container mt-5">
+
+  <h1 class="mb-4">Event Details</h1>
+
+  <div class="card">
+    <div class="card-body">
+      <p class="card-text">
+        <strong>ID:</strong>
+        <span th:text="${event.id}"></span>
+      </p>
+      <p class="card-text">
+        <strong>Name:</strong>
+        <span th:text="${event.name}"></span>
+      </p>
+      <p class="card-text">
+        <strong>Start Date & Time:</strong>
+        <span th:text="${#temporals.format(event.startDateTime, 'yyyy-MM-dd HH:mm')}"></span>
+      </p>
+      <p class="card-text">
+        <strong>End Date & Time:</strong>
+        <span th:text="${#temporals.format(event.endDateTime, 'yyyy-MM-dd HH:mm')}"></span>
+      </p>
+    </div>
+  </div>
+
+  <div class="mt-3">
+    <a href="/events" class="btn btn-secondary">Back to Events</a>
+  </div>
+</section>
+
+</body>
+</html>

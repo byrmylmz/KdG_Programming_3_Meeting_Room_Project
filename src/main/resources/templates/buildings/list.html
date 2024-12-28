@@ -15,14 +15,23 @@
         <tr>
             <th>Name</th>
             <th>Address</th>
-            <th>Number of Floors</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="building : ${buildings}">
             <td th:text="${building.name}"></td>
             <td th:text="${building.address}"></td>
-            <td th:text="${building.numberOfFloors}"></td>
+            <td>
+                <a th:href="@{/buildings/update/{id}(id=${building.id})}" class="btn btn-warning btn-sm">Update</a>
+
+                <form th:action="@{/buildings/delete/{id}(id=${building.id})}" method="post" style="display: inline;">
+                    <button type="submit" class="btn btn-danger btn-sm"
+                            onclick="return confirm('Are you sure you want to delete this building?');">Delete</button>
+                </form>
+
+                <a th:href="@{/buildings/{id}/rooms(id=${building.id})}" class="btn btn-info btn-sm">View Rooms</a>
+            </td>
         </tr>
         </tbody>
     </table>
