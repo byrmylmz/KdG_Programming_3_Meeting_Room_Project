@@ -1,5 +1,6 @@
 package be.kdg.event.service.Impl;
 
+import be.kdg.event.exception.BuildingNotFoundException;
 import be.kdg.event.mappers.RoomMapper;
 import be.kdg.event.model.Room;
 import be.kdg.event.repository.RoomRepository;
@@ -83,6 +84,12 @@ public class RoomServiceImpl implements RoomService {
         logger.debug("Saving room: {}", room);
         try {
             Room roomSave = RoomMapper.toEntity(room);
+            //throw an exception
+//            room.setBuilding(null);
+
+            if(room.getBuilding() == null){
+                throw new BuildingNotFoundException("Building could not found");
+            }
             if (Objects.nonNull(roomSave)) {
                 roomRepository.save(roomSave);
                 logger.info("Room has been saved successfully.");

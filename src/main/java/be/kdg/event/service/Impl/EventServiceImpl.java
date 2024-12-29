@@ -1,16 +1,21 @@
 package be.kdg.event.service.Impl;
 
+import be.kdg.event.exception.RoomNotFoundException;
 import be.kdg.event.mappers.EventMapper;
 import be.kdg.event.model.Event;
+import be.kdg.event.model.Room;
 import be.kdg.event.repository.EventRepository;
 import be.kdg.event.service.EventService;
 import be.kdg.event.viewmodels.EventViewModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Profile("!spring-data-jpa")
@@ -43,9 +48,24 @@ public class EventServiceImpl implements EventService {
     public void addEvent(EventViewModel viewModel) {
         logger.debug("Adding a new viewModel: {}", viewModel);
         Event event = EventMapper.toEntity(viewModel);
-        eventRepository.save(event);
-        logger.info("Event with ID {} has been added successfully.", event.getId());
+
+        if (!viewModel.getRoomIdList().isEmpty()) {
+            List<Room> rooms = viewModel.getRoomIdList().stream()
+                    .map(roomId -> {
+                        Room room = new Room();
+                        room.setId(roomId);
+                        return room;
+                    }).collect(Collectors.toList());
+            event.setRooms(rooms);
+            eventRepository.save(event);
+            logger.info("Event with ID {} has been added successfully.", event.getId());
+        }else {
+            throw new RoomNotFoundException("Room not found for the given ID.");
+        }
+
+       
     }
+
     @Override
     public void updateEvent(Long id, EventViewModel viewModel) {
         logger.debug("Updating event with ID {} using viewModel: {}", id, viewModel);
@@ -57,7 +77,19 @@ public class EventServiceImpl implements EventService {
         Event updatedEvent = EventMapper.toEntity(viewModel);
         updatedEvent.setId(existingEvent.getId());
 
-        eventRepository.update(updatedEvent);
+        if (viewModel.getRoomIdList() != null) {
+            List<Room> rooms = viewModel.getRoomIdList().stream()
+                    .map(roomId -> {
+                        Room room = new Room();
+                        room.setId(roomId);
+                        return room;
+                    }).collect(Collectors.toList());
+            updatedEvent.setRooms(rooms);
+        } else {
+            updatedEvent.setRooms(existingEvent.getRooms());
+        }
+
+        eventRepository.save(updatedEvent);
         logger.info("Event with ID {} has been updated successfully.", id);
     }
 

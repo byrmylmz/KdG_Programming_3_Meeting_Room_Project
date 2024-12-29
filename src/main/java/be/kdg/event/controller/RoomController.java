@@ -1,6 +1,6 @@
 package be.kdg.event.controller;
 
-import be.kdg.event.mappers.RoomMapper;
+import be.kdg.event.exception.BuildingNotFoundException;
 import be.kdg.event.model.Room;
 import be.kdg.event.service.BuildingService;
 import be.kdg.event.service.RoomService;
@@ -9,11 +9,12 @@ import be.kdg.event.viewmodels.RoomViewModel;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 @Controller
@@ -22,7 +23,8 @@ public class RoomController {
 
     private final RoomService roomService;
     private final SessionHistoryService sessionHistoryService;
-    private final BuildingService buildingService; // Service to get the list of buildings
+    private final BuildingService buildingService;
+    private static final Logger logger = LoggerFactory.getLogger(RoomController.class);
 
 
     @Autowired
@@ -41,7 +43,7 @@ public class RoomController {
     }
 
     @GetMapping("/add")
-    public String addRoomForm(Model model,HttpSession session) {
+    public String addRoomForm(Model model, HttpSession session) {
         sessionHistoryService.trackPageVisit(session, "/rooms/add");
         model.addAttribute("room", new RoomViewModel());
         model.addAttribute("buildings", buildingService.getAllBuildings());
@@ -55,6 +57,14 @@ public class RoomController {
         }
         roomService.saveRoom(room);
         return "redirect:/rooms";
+    }
+
+    @ExceptionHandler(BuildingNotFoundException.class)
+    public String handleBuildingNotFoundException(BuildingNotFoundException e, Model model) {
+        logger.error("Error occurred: {}", e.getMessage());
+        model.addAttribute("errorMessage", e.getMessage());
+        model.addAttribute("url", "/rooms/add");
+        return "errors/generic";
     }
 
     @GetMapping("/update/{id}")
@@ -73,7 +83,7 @@ public class RoomController {
         }
         room.setId(id);
 
-        roomService.updateRoom(id,room);
+        roomService.updateRoom(id, room);
         return "redirect:/rooms";
     }
 

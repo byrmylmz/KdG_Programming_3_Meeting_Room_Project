@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Database Error</title>
+</head>
+<body>
+<h1>Database Error</h1>
+<p>There was an issue with the database. Please try again later.</p>
+<p th:text="'Error Details: ' + ${errorMessage}"></p>
+</body>
+</html>
