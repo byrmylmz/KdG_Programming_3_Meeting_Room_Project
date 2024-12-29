@@ -21,6 +21,7 @@
                         <p class="card-number" th:text="${totalRoomNumber}">120</p> <!-- Dinamik değer -->
                     </div>
                 </div>
+                <button id="exportRooms" class="btn btn-info" onclick="window.location.href='/export/rooms'">Export Rooms</button>
             </div>
             <div class="col-md-4">
                 <div class="card text-white bg-success mb-4">
@@ -29,6 +30,7 @@
                         <p class="card-number" th:text="${totalEventNumber}">45</p> <!-- Dinamik değer -->
                     </div>
                 </div>
+                <button id="exportEvents" class="btn btn-secondary" onclick="window.location.href='/export/events'">Export Events</button>
             </div>
             <div class="col-md-4">
                 <div class="card text-white bg-warning mb-4">
@@ -37,6 +39,7 @@
                         <p class="card-number" th:text="${totalBuildingNumber}">10</p> <!-- Dinamik değer -->
                     </div>
                 </div>
+                <button id="exportBuildings" class="btn btn-warning" onclick="window.location.href='/export/buildings'">Export Buildings</button>
             </div>
         </div>
     </div>
