@@ -54,8 +54,7 @@ dependencies {
 
     implementation("org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE")
 
-
-
+    implementation("com.google.code.gson:gson:2.10.1")
 }
 
 
