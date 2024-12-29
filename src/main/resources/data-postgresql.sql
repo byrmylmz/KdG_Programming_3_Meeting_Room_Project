@@ -5,7 +5,7 @@ INSERT INTO ROOMS (name, number, capacity, building_id, created_at, updated_at) 
     ('Room A', '101', 50, 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 INSERT INTO EVENTS (name, start_date_time, end_date_time, created_at, updated_at) VALUES
-    ('Event 1', CURRENT_TIMESTAMP, DATEADD(HOUR, 2, CURRENT_TIMESTAMP), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    ('Event 1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP + INTERVAL '2 HOURS', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 INSERT INTO EVENTS_ROOMS (event_id, room_id) VALUES
     (1, 1);

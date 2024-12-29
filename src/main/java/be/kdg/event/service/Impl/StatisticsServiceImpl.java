@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Service
+@Profile("!spring-data-jpa")
 public class StatisticsServiceImpl implements StatisticsService {
     private final EventRepository eventRepository;
     private final RoomRepository roomRepository;

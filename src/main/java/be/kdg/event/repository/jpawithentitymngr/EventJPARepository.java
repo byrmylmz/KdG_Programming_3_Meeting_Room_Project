@@ -1,4 +1,4 @@
-package be.kdg.event.repository.jpa;
+package be.kdg.event.repository.jpawithentitymngr;
 
 
 import be.kdg.event.model.Event;

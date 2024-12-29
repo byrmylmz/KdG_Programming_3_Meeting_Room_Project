@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
+@Profile("!spring-data-jpa")
 public class BuildingServiceImpl implements BuildingService {
     private static final Logger logger = LoggerFactory.getLogger(BuildingServiceImpl.class);
     private final BuildingRepository buildingRepository;

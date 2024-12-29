@@ -21,6 +21,6 @@ VALUES
 
 INSERT INTO EVENT_ROOMS (EVENT_ID, ROOM_ID)
 VALUES
-    (1, 1), -- ANNUAL MEETING @ Conference Room (ROOM_ID 1)
-    (2, 3), -- TECH WORKSHOP @ Research Lab (ROOM_ID 3)
-    (3, 5); -- BOOK FAIR @ Auditorium (ROOM_ID 5)
+    (1, 1),
+    (2, 3),
+    (3, 5);
